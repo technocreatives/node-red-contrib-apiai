@@ -1,0 +1,77 @@
+<!-- Agent Config -->
+
+<script type="text/x-red" data-template-name="apiai-agent">
+
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-user"></i> Name</label>
+        <input type="text" id="node-config-input-name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-accessToken"><i class="fa fa-user"></i> Access token</label>
+        <input type="text" id="node-config-input-accessToken">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('apiai-agent',{
+        category: 'config',
+        defaults: {
+            name: { value:"" }
+        },
+        credentials: {
+            accessToken: {type:'text'}
+        },
+        label: function() {
+            return this.name || "";
+        }
+    });
+</script>
+
+<!-- Text Request -->
+
+<script type="text/x-red" data-template-name="apiai-text">
+
+    <div class="form-row">
+        <label for="node-input-agent"><i class="fa fa-globe"></i> Agent</label>
+        <input type="text" id="node-input-agent">
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-user"></i> Name</label>
+        <input type="text" id="node-config-input-name">
+    </div>
+  
+</script>
+
+<script type="text/x-red" data-help-name="apiai-text">
+<p>
+  Takes a text query in <code>msg.payload</code> and makes a request to the Api.ai agent.
+</p>
+<p>
+  Other query options like <code>sessionId</code> should be put in <code>msg.options</code>. See available options at <a href="https://docs.api.ai/docs/query">api.ai/docs/query</a>
+</p>
+<p>
+  On success, the response's speech fullfillment will be placed in <code>msg.payload</code>. The full api.ai response will be placed in <code>msg._apiai</code>
+</p>
+<p>
+  If an error occured the node will output it on the second output with the error response placed in <code>msg.error</code>.
+</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('apiai-text',{
+    category: 'apiai',
+    color: '#ED700A',
+    defaults: {
+      name: {value: ""},
+      agent: {type: 'apiai-agent', required: true}
+    },
+    inputs: 1,
+    outputs: 2,
+    icon: 'apiai.png',
+    label: function() {
+      return this.name || 'apiai-text';
+    }
+  });
+</script>
