@@ -103,6 +103,9 @@
   Takes a event query in <code>msg.payload</code> and makes a request to the Api.ai agent.
 </p>
 <p>
+  The event can also be set dynamically by setting the <code>msg.eventname</code> property.
+</p>
+<p>
   Other query options like <code>sessionId</code> should be put in <code>msg.options</code>. See available options at <a href="https://docs.api.ai/docs/query">api.ai/docs/query</a>
 </p>
 <p>
@@ -119,7 +122,7 @@
     color: '#ED700A',
     defaults: {
       name: {value: "API.AI EVENT"},
-      eventname : {value : "NOTVALID", required : true},
+      eventname: {value: "NOTVALID", required: false},
       agent: {type: 'apiai-agent', required: true}
     },
     inputs: 1,
